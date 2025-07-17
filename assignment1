@@ -1,0 +1,410 @@
+Week 1:
+1. When you have 2 local commits and run git push:
+-If the remote has no new commits, both commits are pushed successfully.
+- If the remote has new commits, the push is rejected. You must pull (merge or rebase) first, then push again.
+
+2. A float = Sign bit + Exponent (biased) + Mantissa
+This allows storing very large and very small numbers in limited bits.
+
+3. PERFRCT SQUARE:
+import math
+
+def is_perfect_square(n):
+    if n < 0:
+        return False
+    root = int(math.sqrt(n))
+    return root * root == n
+
+num = 49
+print(f"{num} is a Perfect Square" if is_perfect_square(num) else f"{num} is Not a Perfect Square")
+
+4. LEAP YEAR:
+def check_leap_year(year):
+    if year % 400 == 0:
+        return True
+    elif year % 100 == 0:
+        return False
+    elif year % 4 == 0:
+        return True
+    else:
+        return False
+
+year = 2000
+if check_leap_year(year):
+    print(f"{year} is a Leap Year")
+else:
+    print(f"{year} is Not a Leap Year")
+
+5.All of the following functions come from the builtins module in Python:
+range()
+input()
+print()
+len()
+min()
+max()
+sorted()
+
+6.
+num = int(input("Enter a number: "))
+max_digit = 0
+
+while num > 0:
+    digit = num % 10
+    if digit > max_digit:
+        max_digit = digit
+    num = num // 10
+
+print("The biggest digit is:", max_digit)
+
+7.num = int(input("Enter a number: "))
+prime_digits = [2, 3, 5, 7]
+count = 0
+
+while num > 0:
+    digit = num % 10
+    if digit in prime_digits:
+        count += 1
+    num = num // 10
+
+print("Number of prime digits:", count)
+
+8.Prime number:
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5)+1):
+        if num % i == 0:
+            return False
+    return True
+
+
+m = int(input("Enter the lower limit (m): "))
+n = int(input("Enter the upper limit (n): "))
+
+print(f"Prime numbers between {m} and {n} in decreasing order:")
+for i in range(n, m - 1, -1):
+    if is_prime(i):
+        print(i, end=' ')
+
+
+
+9.
+num = input("Enter a number: ")
+sum_even_pos = 0
+
+# Start from the right, so reverse the number
+num_reversed = num[::-1]
+
+for i in range(len(num_reversed)):
+    if (i + 1) % 2 == 0:  # Even position (1-based index)
+        sum_even_pos += int(num_reversed[i])
+
+print("Sum of digits at even positions:", sum_even_pos)
+
+10. The builtins module contains all the core functions and types that you can use without importing anything, like:
+
+print()
+len()
+range()
+int, str, list, etc
+
+
+WEEK -2:
+
+1.object is the ultimate parent (base) class in Python. All classes (including user-defined) implicitly inherit from it.
+
+2.
+These are special methods with names like __init__, __str__, __len__, etc. They allow classes to behave like built-in types.
+Examples:
+__init__() → Constructor
+
+__str__() → String representation
+
+__len__() → Used by len()
+ 
+3. def main():
+    print("Hello from main!")
+
+if __name__ == "__main__":
+    main()
+
+4. List Methods:
+append(), extend(), insert(), remove(), pop(), clear(),index(), count(), sort(), reverse(), copy()
+🔹 String Methods:
+lower(), upper(), title(), strip(), replace(),split(), join(), find(), index(), startswith(), endswith()
+
+5.Lists are mutable, allowing modification or extension (e.g., testing, scripting).
+Tuples are immutable — not ideal for flexible argument handling.
+
+6.Pythonic:
+Writing code that follows Python’s style, simplicity, and readability.
+Example: Using list comprehensions instead of verbose loops.
+PEP 8:
+Python Enhancement Proposal #8 — the style guide for Python code.
+Covers naming conventions, indentation, spacing, imports, etc.
+
+ DSA:
+ 7. def binary_search(arr, low, high, target):
+    if low > high:
+        return -1
+    mid = (low + high) // 2
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] > target:
+        return binary_search(arr, low, mid - 1, target)
+    else:
+        return binary_search(arr, mid + 1, high, target)
+
+arr = [1, 3, 5, 7, 9]
+print("Index:", binary_search(arr, 0, len(arr) - 1, 7))
+
+8.def fib(n):
+    if n <= 1:
+        return n
+    return fib(n-1) + fib(n-2)
+
+n_terms = int(input("Enter number of terms: "))
+for i in range(n_terms):
+    print(fib(i), end=' ')
+
+9.def sum_of_digits(n):
+    if n == 0:
+        return 0
+    return n % 10 + sum_of_digits(n // 10)
+
+num = int(input("Enter a number: "))
+print("Sum of digits:", sum_of_digits(num))
+
+10. def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_index = i
+        already_sorted = True
+        for j in range(i+1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+            if arr[j] < arr[j-1]:
+                already_sorted = False
+        if already_sorted:
+            break
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+    return arr
+
+nums = [3, 1, 4, 5, 2]
+print("Sorted:", selection_sort(nums))
+
+11.  Efficiency of Quick Sort – Best Case
+Best Case:
+When the pivot divides the array into two equal halves each time.
+Time Complexity:
+Best Case: O(n log n)
+
+12.class ReadOnly:
+    def __init__(self, value):
+        self._value = value
+
+    @property
+    def value(self):
+        return self._value
+
+obj = ReadOnly(10)
+print(obj.value) 
+
+Linked List Problems:(Create using OOP/Class):
+13. class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class QueueSLL:
+    def __init__(self):
+        self.front = self.rear = None
+
+    def enqueue(self, data):
+        new_node = Node(data)
+        if not self.rear:
+            self.front = self.rear = new_node
+            return
+        self.rear.next = new_node
+        self.rear = new_node
+
+    def dequeue(self):
+        if not self.front:
+            return "Queue is empty"
+        val = self.front.data
+
+14.class DLLNode:
+    def __init__(self, data):
+        self.data = data
+        self.prev = self.next = None
+
+class QueueDLL:
+    def __init__(self):
+        self.front = self.rear = None
+
+    def enqueue(self, data):
+        new_node = DLLNode(data)
+        if not self.rear:
+            self.front = self.rear = new_node
+        else:
+            self.rear.next = new_node
+            new_node.prev = self.rear
+            self.rear = new_node
+
+    def dequeue(self):
+        if not self.front:
+            return "Queue is empty"
+        val = self.front.data
+        self.front = self.front.next
+        if self.front:
+            self.front.prev = None
+        else:
+            self.rear = None
+        return val
+
+
+15.class StackSLL:
+    def __init__(self):
+        self.head = None
+
+    def push(self, data):
+        node = Node(data)
+        node.next = self.head
+        self.head = node
+
+    def pop(self):
+        if not self.head:
+            return "Stack is empty"
+        val = self.head.data
+        self.head = self.head.next
+        return val
+
+
+16.class StackDLL:
+    def __init__(self):
+        self.top = None
+
+    def push(self, data):
+        node = DLLNode(data)
+        if not self.top:
+            self.top = node
+        else:
+            self.top.next = node
+            node.prev = self.top
+            self.top = node
+
+    def pop(self):
+        if not self.top:
+            return "Stack is empty"
+        val = self.top.data
+        self.top = self.top.prev
+        if self.top:
+            self.top.next = None
+        return val
+
+
+17.def reverse_sll(head):
+    prev = None
+    current = head
+    while current:
+        next_node = current.next
+        current.next = prev
+        prev = current
+        current = next_node
+    return prev  # new head
+
+
+18.def merge_sorted_slls(l1, l2):
+    dummy = Node(0)
+    tail = dummy
+    while l1 and l2:
+        if l1.data < l2.data:
+            tail.next = l1
+            l1 = l1.next
+        else:
+            tail.next = l2
+            l2 = l2.next
+        tail = tail.next
+    tail.next = l1 if l1 else l2
+    return dummy.next
+
+
+19.def get_length(head):
+    count = 0
+    while head:
+        count += 1
+        head = head.next
+    return count
+
+def find_intersection(head1, head2):
+    len1, len2 = get_length(head1), get_length(head2)
+
+    # Align starts
+    if len1 > len2:
+        for _ in range(len1 - len2):
+            head1 = head1.next
+    else:
+        for _ in range(len2 - len1):
+            head2 = head2.next
+
+    while head1 and head2:
+        if head1 == head2:
+            return head1  # Converging node
+        head1 = head1.next
+        head2 = head2.next
+    return None
+
+
+ OTHER STRUCTURE PROBLEMS:
+20.class CircularQueue:
+    def __init__(self, size):
+        self.queue = [None] * size
+        self.size = size
+        self.front = self.rear = -1
+
+    def enqueue(self, data):
+        if (self.rear + 1) % self.size == self.front:
+            return "Queue is full"
+        if self.front == -1:
+            self.front = self.rear = 0
+        else:
+            self.rear = (self.rear + 1) % self.size
+        self.queue[self.rear] = data
+
+    def dequeue(self):
+        if self.front == -1:
+            return "Queue is empty"
+        val = self.queue[self.front]
+        if self.front == self.rear:
+            self.front = self.rear = -1  # Queue empty now
+        else:
+            self.front = (self.front + 1) % self.size
+        return val
+
+21.def spiral_print(matrix):
+    if not matrix:
+        return
+
+    top, bottom = 0, len(matrix)-1
+    left, right = 0, len(matrix[0])-1
+
+    while top <= bottom and left <= right:
+        for i in range(left, right + 1):
+            print(matrix[top][i], end=' ')
+        top += 1
+
+        for i in range(top, bottom + 1):
+            print(matrix[i][right], end=' ')
+        right -= 1
+
+        if top <= bottom:
+            for i in range(right, left - 1, -1):
+                print(matrix[bottom][i], end=' ')
+            bottom -= 1
+
+        if left <= right:
+            for i in range(bottom, top - 1, -1):
+                print(matrix[i][left], end=' ')
+            left += 1
+
+spiral_print([[1,2,3], [4,5,6], [7,8,9]])
