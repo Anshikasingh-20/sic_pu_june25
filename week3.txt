@@ -1,0 +1,58 @@
+# FARMERS PROBLEM:
+# Total land and equal division
+total_acres = 80
+segment_acres = total_acres / 5  # 16 acres per crop
+
+# Crop details with respective yields and prices
+crops = {
+    "Tomatoes": {
+        "land": segment_acres,
+        "yield": lambda acres: (0.3 * acres * 10 + 0.7 * acres * 12),  # tonnes
+        "price_per_kg": 7  # per kg
+    },
+    "Potatoes": {
+        "land": segment_acres,
+        "yield": lambda acres: acres * 10,
+        "price_per_kg": 20
+    },
+    "Cabbage": {
+        "land": segment_acres,
+        "yield": lambda acres: acres * 14,
+        "price_per_kg": 24
+    },
+    "Sunflower": {
+        "land": segment_acres,
+        "yield": lambda acres: acres * 0.7,
+        "price_per_kg": 200
+    },
+    "Sugarcane": {
+        "land": segment_acres,
+        "yield": lambda acres: acres * 45,
+        "price_per_tonne": 4000
+    }
+}
+
+# Total sales from all crops
+total_sales = 0
+for crop, data in crops.items():
+    acres = data["land"]
+    yield_in_tonnes = data["yield"](acres)
+    if crop == "Sugarcane":
+        sales = yield_in_tonnes * data["price_per_tonne"]
+    else:
+        sales = yield_in_tonnes * 1000 * data["price_per_kg"]  # Convert tonnes to kg
+    crops[crop]["sales"] = sales
+    total_sales += sales
+
+# Sales from chemical-free farming (after 11 months)
+chemical_free_crops = ["Tomatoes", "Potatoes", "Cabbage", "Sunflower"]
+chemical_free_sales = sum(crops[crop]["sales"] for crop in chemical_free_crops)
+
+# Display results
+print("----- Mahesh's Farm Sales Report -----")
+print(f"Total Sales from 80 acres: ₹{total_sales:,.2f}")
+print(f"Chemical-Free Sales (after 11 months): ₹{chemical_free_sales:,.2f}")
+print("\nCrop-wise Sales Breakdown:")
+for crop, data in crops.items():
+    print(f"{crop}: ₹{data['sales']:,.2f}")
+
