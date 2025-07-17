@@ -1,0 +1,36 @@
+ class Singleton:
+    _inst = None
+    def __new__(cls):
+        if not cls._inst:
+            cls._inst = super().__new__(cls)
+        return cls._inst
+
+a = Singleton()
+b = Singleton()
+print(a is b)  
+
+2. #TOWER OF HANOI:
+def tower_of_hanoi(n, source, target, auxiliary):
+    if n == 1:
+        print(f"Move disk 1 from {source} to {target}")
+        return
+    tower_of_hanoi(n - 1, source, auxiliary, target)
+    print(f"Move disk {n} from {source} to {target}")
+    tower_of_hanoi(n - 1, auxiliary, target, source)
+
+
+tower_of_hanoi(3, 'A', 'C', 'B')
+
+
+
+3.def fib(n, memo={}):
+    if n <= 1:
+        return n
+    if n not in memo:
+        memo[n] = fib(n-1, memo) + fib(n-2, memo)
+    return memo[n]
+
+for i in range(10):
+    print(fib(i), end=" ")
+
+
