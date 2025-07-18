@@ -1,0 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    color: darkgreen;
+}
+.chart img {
+    width: 45%;
+    margin: 10px;
+    border: 2px solid #ccc;
+}
